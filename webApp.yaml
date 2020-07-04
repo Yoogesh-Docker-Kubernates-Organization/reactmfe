@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: react-mfe
+  
+spec:
+  selector:
+    matchLabels:
+      app: yoogeshMFE
+      
+  replicas: 1
+  
+  template:
+    metadata:
+      name: react-mfe
+      labels:
+        app: yoogeshMFE
+    spec:
+      containers:
+      - name: react-mfe
+        image: yoogesh1983/reactmfe:latest
+        resources:
+          requests:
+            memory: 20Mi
+            cpu: 10m
+        
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: twm-react-mfe
+  
+spec:
+ selector:
+   app: yoogeshMFE
+   
+ ports:
+   - name: http
+     port: 80
+     targetPort: 3000
+     
+ type: LoadBalancer
