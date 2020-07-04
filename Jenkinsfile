@@ -30,11 +30,11 @@ pipeline {
             		sh 'docker push ${REPOSITORY_TAG}'
             	}
 		}
-/*
+
 		stage('Deploy to Cluster') {
 			steps {
 					sh 'kubectl apply -f webApp.yaml'
 			}
-		}*/
+		}
 	}
 }
