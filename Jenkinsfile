@@ -34,7 +34,7 @@ pipeline {
 
 		stage('Deploy to Cluster') {
 			steps {
-					sh "kubectl apply -f ${YAML_PATH}/webapp/webApp.yaml"
+					sh "kubectl apply -f ${YAML_PATH}/webapp.yaml"
 			}
 		}
 	}
