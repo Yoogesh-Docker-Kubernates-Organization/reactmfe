@@ -1,12 +1,14 @@
 FROM node:alpine
 
-MAINTAINER Yoogesh Sharma "yoogesh1983@gmail.com"
+WORKDIR /usr/app
 
-# Copy every thing from the current working directory i.e. reactmfe to current working directory of the container
-COPY ./ ./
-COPY ./required/required_build ./build
-COPY ./required/required_public ./public
+COPY ./package.json ./
 
 RUN npm install
+
+COPY ./devops/essential/build ./build
+COPY ./devops/essential/public ./public
+COPY ./ ./
+
 
 CMD ["npm", "run", "dev"]
