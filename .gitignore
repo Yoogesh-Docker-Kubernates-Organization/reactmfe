@@ -6,3 +6,4 @@ public
 .settings
 package-lock.json
 .DS_Store
+.style.css
