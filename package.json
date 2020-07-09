@@ -5,6 +5,7 @@
   "main": "Entry.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
+    "dev:scss": "node-sass resources/sass/main.scss src/css/style.css",
     "dev:build-server": "webpack --mode development --env.NODE_ENV=development --env.ENV=local --env.DEBUG --env.APP_CONTEXT=checkout --config webpack.server.js --watch",
     "dev:build-client": "webpack --mode development --env.NODE_ENV=development --env.ENV=local --env.DEBUG --env.APP_CONTEXT=checkout --config webpack.client.js --watch",
     "dev:server": "nodemon --watch build --exec node build/bundle.js",
