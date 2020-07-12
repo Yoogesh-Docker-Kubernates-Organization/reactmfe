@@ -11,7 +11,7 @@ COPY /MFE/client/resources/devops/essential/pre_build ./build
 COPY /MFE/client/resources/devops/essential/pre_public ./public
 
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "prod"]
 
 
 #FROM nginx
