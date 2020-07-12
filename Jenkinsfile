@@ -3,7 +3,7 @@ pipeline {
 	
 	environment {
 		SERVICE_NAME = "reactmfe"
-		YAML_PATH = "/MFE/client/resources/devops/k8s_aws"
+		YAML_PATH = "MFE/client/resources/devops/k8s_aws"
 		REPOSITORY_TAG="${DOCKERHUB_USERNAME}/${SERVICE_NAME}:latest"
 	}
 	
