@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: yoogeshMFE
       
-  replicas: 1
+  replicas: 2
   
   template:
     metadata:
