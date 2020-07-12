@@ -9,8 +9,13 @@
     "dev:build-server": "webpack --mode development --env.NODE_ENV=development --env.ENV=local --env.DEBUG --env.APP_CONTEXT=checkout --config webpack.server.js --watch",
     "dev:build-client": "webpack --mode development --env.NODE_ENV=development --env.ENV=local --env.DEBUG --env.APP_CONTEXT=checkout --config webpack.client.js --watch",
     "dev:server": "nodemon --watch build --exec node build/bundle.js",
-    "build-server": "webpack --mode production -p --env.NODE_ENV=$npm_config_node_env --env.ENV=$npm_config_env --env.DEBUG=false --env.APP_CONTEXT=$npm_config_context_root --config webpack.server.js",
-    "build-client": "webpack --mode production -p --env.NODE_ENV=$npm_config_node_env --env.ENV=$npm_config_env --env.DEBUG=false --env.APP_CONTEXT=$npm_config_context_root --config webpack.client.js",
+
+    "prod": "npm-run-all --parallel build:*",
+    "build:scss": "node-sass MFE/client/resources/sass/main.scss MFE/client/resources/css/style.css",
+    "build:build-server": "webpack --mode production -p --env.NODE_ENV=production --env.ENV=prod --env.DEBUG --env.APP_CONTEXT=checkout --config webpack.server.js --watch",
+    "build:build-client": "webpack --mode production -p --env.NODE_ENV=production --env.ENV=prod --env.DEBUG --env.APP_CONTEXT=checkout --config webpack.client.js --watch",
+    "build:server": "nodemon --watch build --exec node build/bundle.js",
+
     "stylelint": "stylelint \"./src/client/**/*.css\" --fix",
     "cosmos": "APP_CONTEXT=checkout ./node_modules/react-cosmos/bin/cosmos.js --config ./cosmos.config.js"
   },
