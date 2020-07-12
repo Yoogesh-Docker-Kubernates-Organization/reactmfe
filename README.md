@@ -16,13 +16,3 @@ if not run successfully, You may need to do the following installation</br>
 > npm install npm-run-all --save-dev </br>
 > npm install -g nodemon </br>
 
-# How to clone a project (Using VisualStudio Code) </br>
-> Ctrl+Shift+p </br>
-> git clone </br>
-> Enter a URL </br>
-> select a folder you want to save the the project into your local</br>
-> Close the project from Visual code and again open the particular project inside the folder i.e. REACTContact_SSR </br>
-
-Run a following command to commit git from visualcode (Otherwise it will not show the username password modal popup) </br>
-> git config --global user.email "yoogesh1983@gmail.com" </br>
-> git config --global user.name "Yoogesh"</br>
