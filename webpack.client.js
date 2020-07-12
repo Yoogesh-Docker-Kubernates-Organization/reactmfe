@@ -18,7 +18,7 @@ const definePluginInstance = new DefinePlugin({
 const config = {
 
   // Setting the entry Point
-  entry: { bundle: './src/init/Entry_Client.js'},
+  entry: { bundle: './MFE/client/init/Entry_Client.js'},
 
   //Optimize with Spliting into a number of chunks
   optimization: { splitChunks: { chunks: 'all' } },

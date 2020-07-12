@@ -9,7 +9,7 @@ module.exports = env => {
           plugins: [
                     new EnvironmentPlugin({ NODE_ENV: env.NODE_ENV, DEBUG: env.DEBUG, APP_CONTEXT: env.APP_CONTEXT, ENV: env.ENV }),
                     new MiniCssExtractPlugin({ filename: "style.[chunkhash].css" }),
-                    new Dotenv({ path: path.resolve(__dirname, 'conf', `.env.${env.ENV}`) })
+                    new Dotenv({ path: path.resolve(__dirname, 'MFE/client/resources/conf', `.env.${env.ENV}`) })
                   ],
             
           resolve: { alias: {bundleAssets: path.join(__dirname, 'build', 'bundle-assets.json')} },

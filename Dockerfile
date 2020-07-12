@@ -7,8 +7,8 @@ COPY ./package.json ./
 RUN npm install
 
 COPY ./ ./
-COPY /devops/essential/pre_build ./build
-COPY /devops/essential/pre_public ./public
+COPY /MFE/client/resources/devops/essential/pre_build ./build
+COPY /MFE/client/resources/devops/essential/pre_public ./public
 
 
 CMD ["npm", "run", "dev"]
