@@ -8,10 +8,10 @@ class EditContact extends Component {
 
   constructor(props){
     super(props);
-    this.state = {  id : '', 
-                    name: '', 
-                    phone: '', 
-                    email: '', 
+    this.state = {  uid : '', 
+                    firstName: '', 
+                    lastName: '', 
+                    username: '', 
                     errors: {}
                  };
   };
@@ -23,12 +23,12 @@ class EditContact extends Component {
   };
 
   componentWillReceiveProps(nextProps, nextState){
-    const {id, name, phone, email } = nextProps.currentContact;
+    const {uid, firstName, lastName, username } = nextProps.currentContact;
     this.setState({
-         id,
-         name,
-         phone,
-         email
+         uid,
+         firstName,
+         lastName,
+         username
     });
   }
 
@@ -46,7 +46,7 @@ class EditContact extends Component {
       this.props.editContactAction(this.state);
 
      //remove value after submitting
-     this.setState({ id:'', name:'',  phone:'',  email:'',  errors:{}});
+     this.setState({ uid:'', firstName:'',  lastName:'',  username:'',  errors:{}});
 
      //Finally redirect to home page
      this.props.history.push('/');
@@ -56,16 +56,16 @@ class EditContact extends Component {
 
   render()
   {
-    const {name, phone, email, errors} = this.state;
+    const {firstName, lastName, username, errors} = this.state;
 
     return (
     <div className="card mb-5">
       <div className="card-header">Edit Id: [{this.props.match.params.id}]</div>
       <div className="card-body">
         <form onSubmit={this.onsubmit.bind(this)}>
-          <TextInputGroup name="name" placeholder="Enter name" value={name} onChange={this.onchange.bind(this)} error={errors.name} />
-          <TextInputGroup name="phone" placeholder="Enter phone" value={phone} onChange={this.onchange.bind(this)} error={errors.phone} />
-          <TextInputGroup type="email" name="email" placeholder="Enter email" value={email} onChange={this.onchange.bind(this)} error={errors.email}/>
+          <TextInputGroup name="name" placeholder="Enter name" value={firstName} onChange={this.onchange.bind(this)} error={errors.name} />
+          <TextInputGroup name="phone" placeholder="Enter phone" value={lastName} onChange={this.onchange.bind(this)} error={errors.phone} />
+          <TextInputGroup type="email" name="email" placeholder="Enter email" value={username} onChange={this.onchange.bind(this)} error={errors.email}/>
           <input type="submit" value="Update Contact" className="btn btn-block btn-success" />
         </form>
       </div>
@@ -75,23 +75,23 @@ class EditContact extends Component {
 
 
   validateContact() {
-    const {name, phone, email } = this.state;
+    const {firstName, lastName, username } = this.state;
 
-    if (name === '') {
+    if (firstName === '') {
       this.setState({
-        errors: { name: 'Name is required' }
+        errors: { firstName: 'firstName is required' }
       });
       return false;
     }
-    if (phone === '') {
+    if (lastName === '') {
       this.setState({
-        errors: { phone: 'phone is required' }
+        errors: { lastName: 'lastName is required' }
       });
       return false;
     }
-    if (email === '') {
+    if (username === '') {
       this.setState({
-        errors: { email: 'email is required' }
+        errors: { username: 'username is required' }
       });
       return false;
     }
@@ -106,7 +106,7 @@ const mapStateToProps = state => ({
 
 
 
-const loadData = store => store.dispatch(getContactAction('1'));  //No need for return if one line(explicitely it will return)
+const loadData = store => store.dispatch(getContactAction('dba@gmail.com'));  //No need for return if one line(explicitely it will return)
 export {loadData};
 
 export default connect(mapStateToProps, 

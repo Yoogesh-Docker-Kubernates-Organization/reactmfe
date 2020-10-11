@@ -13,7 +13,7 @@ import proxy from 'express-http-proxy';
 const server = express();
 
 
-server.use('/api', proxy('https://jsonplaceholder.typicode.com'));
+server.use('/api', proxy(`${process.env.GO_SERVICE_BASE_URL}`));
 /* treate a 'public' directory to be available into a outside world which can be consumed by browser
    Because of this, the bundle.js will be consumed from 'public' folder not from 'build' folder
 */
@@ -21,6 +21,9 @@ server.use(express.static('public'));
 
 
 server.get('*', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    req.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     const store = getStore(req);
     

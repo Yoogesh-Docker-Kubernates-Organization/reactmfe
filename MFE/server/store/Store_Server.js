@@ -13,7 +13,7 @@ export default (req) => {
 
     //MiddleWare Setting
     const axiosInstance = axios.create({
-        baseURL: 'https://jsonplaceholder.typicode.com',
+        baseURL: `${process.env.GO_SERVICE_BASE_URL}`,
         headers: { cookie: req.get('cookie') || '' }
       });
     const middleware = [thunk.withExtraArgument(axiosInstance), log, stateValidator];

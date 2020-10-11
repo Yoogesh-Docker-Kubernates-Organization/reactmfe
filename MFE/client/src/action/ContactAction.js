@@ -9,7 +9,7 @@ export const getAllContactAction = (source) => async (dispatch, getState, api) =
     
     try
     {
-        const url = '/users';
+        const url = '/user/all';
         let res;
 
 
@@ -26,12 +26,12 @@ export const getAllContactAction = (source) => async (dispatch, getState, api) =
                 return error;
             });
         }
-
+       6+
         //finally dispatch the response
         dispatch({
             type: GET_CONTACTS,
-            payload: res.data,
-            dynamicId:res.data[0].id
+            payload: res.data.data,
+            dynamicId:res.data.data[0].uid
         });
     }
     catch(e)
@@ -43,16 +43,16 @@ export const getAllContactAction = (source) => async (dispatch, getState, api) =
  
 
 
-export const getContactAction = id => async (dispatch, getState, api) => {
+export const getContactAction = uid => async (dispatch, getState, api) => {
 
     try
     {
-        const url = `/users/${id}`;
+        const url = `/user?guid=${uid}`;
         const res = await api.get(url);        
 
         dispatch({
             type: GET_CONTACT,
-            payload: res.data
+            payload: res.data.data
           });        
     }
     catch(e)
@@ -82,7 +82,7 @@ export const getContactAction = id => async (dispatch, getState, api) => {
     
         dispatch({
             type: ADD_CONTACT,
-            payload: res.data
+            payload: res.data.data
           });
 
     }
@@ -101,20 +101,23 @@ export const getContactAction = id => async (dispatch, getState, api) => {
 
     try
     {
-        const { id, name, phone, email } = contact;
+        const { uid, firstName, lastName, username } = contact;
+        console.log("===", uid);
+        console.log("===", firstName);
+        console.log("===", lastName);
+        console.log("===", username);
         const editedContact = {
-            id,                    //id : id
-            name,                  //name : name
-            phone,                 // phone : phone
-            email                  // email : email
+            firstName,                //firstName : firstName
+            lastName,                 // lastName : lastName
+            username                  // username : username
         }
-    
-        const url = `https://jsonplaceholder.typicode.com/users/${id}`;
+
+        const url = `${process.env.GO_SERVICE_BASE_URL}/user/${uid}`;
         const res = await axios.put(url, editedContact);
     
         dispatch({
             type: EDIT_CONTACT,
-            payload: res.data
+            payload: res.data.data
           });
 
     }

@@ -15,22 +15,22 @@ class Contact extends Component{
 
 
     render() {
-        const { id, name, phone, email } = this.props.contact;
+        const { uid, firstName, lastName, username } = this.props.contact;
         const { isUserLoggedIn } = this.props;
            return (
                     <table className="table table-sm table-hover table-striped">
                         <tbody>
                             <tr>
-                                <td>{name}</td>
-                                <td>{phone}</td>
-                                <td>{email}
+                                <td>{firstName}</td>
+                                <td>{lastName}</td>
+                                <td>{username}
                                   {isUserLoggedIn &&
                                   <span>
                                     <i className="fas fa-times" 
                                         style={{curser: 'pointer', float: 'right', color: 'red'}}
-                                        onClick={this.deleteContact.bind(this, id)} />
+                                        onClick={this.deleteContact.bind(this, uid)} />
 
-                                    <Link to={`/contact/edit/${id}`}>
+                                    <Link to={`/contact/edit/${uid}`}>
                                         <i className="fas fa-pencil-alt" 
                                             style={{ curser:'pointer', float: 'right', color:'black', marginRight:'1rem'}} />
                                     </Link>
