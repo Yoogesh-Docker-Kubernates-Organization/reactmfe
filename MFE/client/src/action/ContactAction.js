@@ -19,14 +19,16 @@ export const getAllContactAction = (source) => async (dispatch, getState, api) =
         }
         //Else If Running on Production Environment
         else {
-            res = await api.get(url).catch((error) => {
+            res = await api.get(url, {
+                headers: { identityId: "YYYYYYYYYYYYYY" },
+              }).catch((error) => {
                 if(error && error.response){
                     console.log("Fetching contact failed...!!" + error) ;
                 }
                 return error;
             });
         }
-       6+
+       
         //finally dispatch the response
         dispatch({
             type: GET_CONTACTS,
@@ -97,23 +99,26 @@ export const getContactAction = uid => async (dispatch, getState, api) => {
 
 
 
- export const editContactAction = contact => async dispatch =>  {
+ export const editContactAction = contact => async (dispatch, getState, api) =>  {
 
     try
     {
         const { uid, firstName, lastName, username } = contact;
-        console.log("===", uid);
-        console.log("===", firstName);
-        console.log("===", lastName);
-        console.log("===", username);
         const editedContact = {
             firstName,                //firstName : firstName
             lastName,                 // lastName : lastName
             username                  // username : username
         }
+        const headers = {
+            IdentityId: 'YYYYYYYYMMMMMMMM',
+        }
 
-        const url = `${process.env.GO_SERVICE_BASE_URL}/user/${uid}`;
-        const res = await axios.put(url, editedContact);
+        /* You should never use like this as it will give the cors error */
+        //const url = `${process.env.GO_SERVICE_BASE_URL}/user/${uid}`;
+        // const res = await axios.patch(url, editedContact); 
+
+        const url = `/user/${uid}`;
+        const res = await api.patch(url, editedContact,headers); 
     
         dispatch({
             type: EDIT_CONTACT,
@@ -129,13 +134,13 @@ export const getContactAction = uid => async (dispatch, getState, api) => {
  };
 
 
- export const deleteContactAction = id => async dispatch =>  {
-    const url = `https://jsonplaceholder.typicode.com/users/${id}`;
+ export const deleteContactAction = id => async (dispatch, getState, api) =>  {
+    const url = `/users/${id}`;
 
     try
     {
         // we are not doing anything by response since it is returning empty object always, we don't even need to asign it to variable
-        await axios.delete(url);
+        await api.delete(url);
         dispatch({
             type: DELETE_CONTACT,
             payload: id
