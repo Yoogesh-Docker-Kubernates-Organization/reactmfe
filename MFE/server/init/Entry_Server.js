@@ -21,7 +21,7 @@ server.use('/api', proxy(`${process.env.GO_SERVICE_BASE_URL}`));
 server.use(express.static('public'));
 
 
-server.get('*', (req, res) => {req.header("IdentityId", "YOUR-DOMAIN"); 
+server.get('*', (req, res) => {
     const store = getStore(req);
     
     const promishes = matchRoutes(Route, req.path).map(({ route }) => {return route.loadData ? route.loadData(store) : null;}).map(promise => {if(promise){return new Promise((resolve, reject) => {promise.then(resolve).catch(resolve);});}});

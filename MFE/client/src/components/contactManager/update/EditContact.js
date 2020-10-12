@@ -63,9 +63,9 @@ class EditContact extends Component {
       <div className="card-header">Edit Id: [{this.props.match.params.id}]</div>
       <div className="card-body">
         <form onSubmit={this.onsubmit.bind(this)}>
-          <TextInputGroup name="name" placeholder="Enter name" value={firstName} onChange={this.onchange.bind(this)} error={errors.name} />
-          <TextInputGroup name="phone" placeholder="Enter phone" value={lastName} onChange={this.onchange.bind(this)} error={errors.phone} />
-          <TextInputGroup type="email" name="email" placeholder="Enter email" value={username} onChange={this.onchange.bind(this)} error={errors.email}/>
+          <TextInputGroup name="firstName" placeholder="Enter firstname" value={firstName} onChange={this.onchange.bind(this)} error={errors.firstName} />
+          <TextInputGroup name="lastName" placeholder="Enter lastname" value={lastName} onChange={this.onchange.bind(this)} error={errors.lastName} />
+          <TextInputGroup type="email" name="username" placeholder="Enter username" value={username} onChange={this.onchange.bind(this)} error={errors.username}/>
           <input type="submit" value="Update Contact" className="btn btn-block btn-success" />
         </form>
       </div>

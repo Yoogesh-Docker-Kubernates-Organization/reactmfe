@@ -29,7 +29,7 @@ export default function(state = initialState, action){
         case ADD_CONTACT:
         return {
             ...state, 
-            contacts: {...state.contacts, [action.payload.id]:action.payload}   //contacts: [action.payload, ...state.contacts] 
+            contacts: {...state.contacts, [action.payload.uid]:action.payload}   //contacts: [action.payload, ...state.contacts] 
         };
 
 
@@ -44,7 +44,7 @@ export default function(state = initialState, action){
            return {
                ...state,
               // contacts: state.contacts.map(contact => contact.id == action.payload.id ? (contact = action.payload) : contact) 
-               contacts: {...state.contacts, [action.payload.id]:action.payload}
+               contacts: {...state.contacts, [action.payload.uid]:action.payload}
         };
         
 
