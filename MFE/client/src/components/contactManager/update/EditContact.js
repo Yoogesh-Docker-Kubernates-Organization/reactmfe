@@ -19,7 +19,7 @@ class EditContact extends Component {
   componentDidMount(){ 
       const { id } = this.props.match.params;
       const { getContactAction } = this.props;
-      getContactAction(id);
+      getContactAction(id, );
   };
 
   componentWillReceiveProps(nextProps, nextState){

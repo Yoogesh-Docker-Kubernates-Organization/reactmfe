@@ -38,9 +38,12 @@ export const getAllContactAction = (source) => async (dispatch, getState, api) =
  /**
  * Find user by Id
  */
-export const getContactAction = uid => async (dispatch, getState, api) => {
+export const getContactAction = (uid, username) => async (dispatch, getState, api) => {
     try {
-        const url = `/user?guid=${uid}`;
+        let url = `/user?guid=${uid}`;
+        if(username.includes('@')){
+            url = `/user?username=${username}`;
+        }
         const res = await api.get(url);        
 
         dispatch({

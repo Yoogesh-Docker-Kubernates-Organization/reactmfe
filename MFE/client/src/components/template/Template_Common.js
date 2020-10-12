@@ -59,9 +59,9 @@ const TableHeader = () => {
         <table className="table table-sm table-hover table-striped">
             <thead>
                 <tr className={styles.yms}>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
                 </tr>
             </thead>
         </table>
