@@ -19,9 +19,7 @@ export const getAllContactAction = (source) => async (dispatch, getState, api) =
         }
         //Else If Running on Production Environment
         else {
-            res = await api.get(url, {
-                headers: { identityId: "YYYYYYYYYYYYYY" },
-              }).catch((error) => {
+            res = await api.get(url).catch((error) => {
                 if(error && error.response){
                     console.log("Fetching contact failed...!!" + error) ;
                 }
