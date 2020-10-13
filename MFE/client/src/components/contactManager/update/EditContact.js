@@ -19,7 +19,7 @@ class EditContact extends Component {
   componentDidMount(){ 
       const { id } = this.props.match.params;
       const { getContactAction } = this.props;
-      getContactAction(id, );
+      getContactAction(id);
   };
 
   componentWillReceiveProps(nextProps, nextState){
@@ -106,7 +106,7 @@ const mapStateToProps = state => ({
 
 
 
-const loadData = store => store.dispatch(getContactAction('dba@gmail.com'));  //No need for return if one line(explicitely it will return)
+const loadData = store => store.dispatch(getContactAction('server'));  //No need for return if one line(explicitely it will return)
 export {loadData};
 
 export default connect(mapStateToProps, 

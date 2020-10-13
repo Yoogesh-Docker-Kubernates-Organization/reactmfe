@@ -9,8 +9,8 @@ class Contact extends Component{
         super(props);
     }
     
-    deleteContact = id => {
-        this.props.deleteContactAction(id);
+    deleteContact = (uid, username) => {
+        this.props.deleteContactAction(uid, username);
     }
 
 
@@ -28,7 +28,7 @@ class Contact extends Component{
                                   <span>
                                     <i className="fas fa-times" 
                                         style={{curser: 'pointer', float: 'right', color: 'red'}}
-                                        onClick={this.deleteContact.bind(this, uid)} />
+                                        onClick={this.deleteContact.bind(this, uid, username)} />
 
                                     <Link to={`/contact/edit/${uid}`}>
                                         <i className="fas fa-pencil-alt" 

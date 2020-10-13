@@ -16,29 +16,32 @@ class AddContact extends Component {
 
     //we will set this state by a rest call which happens as soon as the component will mount
     this.state = { 
-      title:''
+      transactionId:'',
+      errors:''
     };
 
-    this.idInput = React.createRef();
-    this.nameInput = React.createRef();
-    this.phoneInput = React.createRef();
-    this.emailInput = React.createRef();
+    this.usernameInput = React.createRef();
+    this.passwordInput = React.createRef();
+    this.firstnameInput = React.createRef();
+    this.lastnameInput = React.createRef();
   };
 
+  // In real scenario, these are passed from parent component like <AddContact username='newuser@gmail.com' password: '1234' firstName: 'Krisha' lastName: 'Sharma'/>
   static defaultProps = {
-    id: '999',
-    name: 'Krisha',
-    phone: '7137322412',
-    email: 'Krisha_45@gmail.com'
+    username: 'newuser@gmail.com',
+    password: '1234',
+    firstName: 'Krisha',
+    lastName: 'Sharma'
    };
    
   onsubmit = (e) => {
     e.preventDefault();
 
     const contact = {
-                      name: this.nameInput.current.value,
-                      phone: this.phoneInput.current.value,
-                      email: this.emailInput.current.value
+                      username: this.usernameInput.current.value,
+                      password: this.passwordInput.current.value,
+                      firstName: this.firstnameInput.current.value,
+                      lastName: this.lastnameInput.current.value
                     }
 
     //check for errors
@@ -56,15 +59,17 @@ class AddContact extends Component {
 
   render() 
   {
-    const { id, name, email, phone, errors} = /*this.state*/ this.props;
+    const { firstName, lastName, username, password} = /*this.state*/ this.props;
+    const {errors} = this.state;
 
     return (<div className="card mb-5">
       <div className="card-header">Add Contact</div>
       <div className="card-body">
         <form onSubmit={this.onsubmit.bind(this)}>
-          <TextInputGroup_ref name="name" placeholder="Enter Name" defaultValue={name} reference={this.nameInput} />
-          <TextInputGroup_ref name="phone" placeholder="Enter phone" defaultValue={phone} reference={this.phoneInput} />
-          <TextInputGroup_ref type="email" name="email" placeholder="Enter email" defaultValue={email} reference={this.emailInput} />
+          <TextInputGroup_ref type="email" name="username" placeholder="Enter username" defaultValue={username} reference={this.usernameInput} error={errors.username} />
+          <TextInputGroup_ref type="password" name="password" placeholder="Enter password" defaultValue={password} reference={this.passwordInput} error={errors.password} />
+          <TextInputGroup_ref name="firstName" placeholder="Enter firstname" defaultValue={firstName} reference={this.firstnameInput} error={errors.firstName} />
+          <TextInputGroup_ref name="lastName" placeholder="Enter lastname" defaultValue={lastName} reference={this.lastnameInput} error={errors.lastName} />
           <input type="submit" value="Add Contact" className="btn btn-block btn-success" />
         </form>
       </div>
@@ -72,40 +77,45 @@ class AddContact extends Component {
   }
 
   validateContact(contact) {
-    const {name, phone, email } = contact;
+    const {firstName, lastName, username, password } = contact;
 
-    if (name === '') {
+    if (firstName === '') {
       this.setState({
-        errors: { name: 'Name is required' }
+        errors: { firstName: 'firstName is required' }
       });
       return false;
     }
-    if (phone === '') {
+    if (lastName === '') {
       this.setState({
-        errors: { phone: 'phone is required' }
+        errors: { lastName: 'lastName is required' }
       });
       return false;
     }
-    if (email === '') {
+    if (username === '') {
       this.setState({
-        errors: { email: 'email is required' }
+        errors: { username: 'username is required' }
+      });
+      return false;
+    }
+    if (password === '') {
+      this.setState({
+        errors: { password: 'password is required' }
       });
       return false;
     }
     return true;
   }
 
-
   //Using Fetch to get request from rest call for more Information Go to ...... https://jsonplaceholder.typicode.com/
   componentDidMount()
   {
-    const url = 'https://jsonplaceholder.typicode.com/todos/1';
+    const url = `${process.env.GO_SERVICE_BASE_URL}/user?username=dba@gmail.com`;
     fetch(url)
       .then(response => response.json())
       .then(data => {
           console.log(data);
           this.setState({
-              title: data.title,
+            transactionId: data.transactionId,
           });
       })
   }

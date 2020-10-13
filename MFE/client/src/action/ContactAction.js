@@ -38,11 +38,14 @@ export const getAllContactAction = (source) => async (dispatch, getState, api) =
  /**
  * Find user by Id
  */
-export const getContactAction = (uid, username) => async (dispatch, getState, api) => {
+export const getContactAction = (source) => async (dispatch, getState, api) => {
     try {
-        let url = `/user?guid=${uid}`;
-        if(username.includes('@')){
-            url = `/user?username=${username}`;
+        let url = `/user?guid=${source}`;
+        if(source.includes('@')){
+            url = `/user?username=${source}`;
+        } else if(source === 'server'){
+            console.log("Making a loadData call to fetch user information. This log will be not be printed on the browser console and will be printed at visualCode console instead. This will get called if you refresh the edit page directly but not while going from other page to this page.")
+            url = `/user?username=dba@gmail.com`;
         }
         const res = await api.get(url);        
 
@@ -87,8 +90,7 @@ export const getContactAction = (uid, username) => async (dispatch, getState, ap
   * Delete user
   */
  export const deleteContactAction = (uid, username) => async (dispatch, getState, api) =>  {
-    const url = `/users/${uid}?username=${username}`;
-
+    const url = `/user/${uid}?username=${username}`;
     try {
         // we are not doing anything by response since it is returning empty object always, we don't even need to asign it to variable
         await api.delete(url);
@@ -105,30 +107,25 @@ export const getContactAction = (uid, username) => async (dispatch, getState, ap
   * 
   * Create user
   */
- export const addContactAction = (contact) => async dispatch =>  {
-
-    try
-    {
-        const { name, phone, email } = contact;
+ export const addContactAction = (contact) => async (dispatch, getState, api) =>  {
+    try {
+        const { firstName, lastName, username, password } = contact;
         const newContact = {
-            id: uuid(),             //Generating random uuid
-            name,                  //name : name
-            phone,                 // phone : phone
-            email                  // email : email
+            //id: uuid(),                 //Generating random uuid (however this id willbe no in use though)
+            firstName,                  //firstName : firstName
+            lastName,                   // lastName : lastName
+            username,                   // username : username
+            password,                   // password : password
         };
 
-        const url = 'https://jsonplaceholder.typicode.com/users';
-        const res = await axios.post(url, newContact);
+        const url = '/user';
+        const res = await api.post(url, newContact);
     
         dispatch({
             type: ADD_CONTACT,
             payload: res.data.data
           });
-
+    } catch(e) {
+        console.log("Adding a contact failed...!!" + e) 
     }
-    catch(e)
-    {
-        console.log("Adding a contact failed...!!") 
-    }
-
  };

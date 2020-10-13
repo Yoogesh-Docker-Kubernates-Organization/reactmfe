@@ -12,10 +12,10 @@ class AddContact extends Component {
 
   constructor(props){
     super(props);
-    this.state = {  id : '', 
-                    name: '', 
-                    phone: '', 
-                    email: '', 
+    this.state = {  firstName : '', 
+                    lastName: '', 
+                    username: '', 
+                    password: '', 
                     errors: {}
                  };
   };
@@ -33,7 +33,7 @@ class AddContact extends Component {
       this.props.addContactAction(this.state);
 
      //remove value after submitting
-     this.setState({ id:'', name:'',  phone:'',  email:'',  errors:{}});
+     this.setState({ firstName:'', lastName:'',  username:'',  password:'',  errors:{}});
 
      //Finally redirect to home page
      this.props.history.push('/');
@@ -43,16 +43,17 @@ class AddContact extends Component {
 
   render()
   {
-    const {name, phone, email, errors} = this.state;
+    const {firstName, lastName, username, password, errors} = this.state;
     
     return (
     <div className="card mb-5">
       <div className="card-header">Add Contact</div>
       <div className="card-body">
         <form onSubmit={this.onsubmit.bind(this)}>
-          <TextInputGroup name="name" placeholder="Enter name" value={name} onChange={this.onchange} error={errors.name} />
-          <TextInputGroup name="phone" placeholder="Enter phone" value={phone} onChange={this.onchange} error={errors.phone} />
-          <TextInputGroup type="email" name="email" placeholder="Enter email" value={email} onChange={this.onchange} error={errors.email}/>
+          <TextInputGroup name="firstName" placeholder="Enter firstname" value={firstName} onChange={this.onchange} error={errors.firstName} />
+          <TextInputGroup name="lastName" placeholder="Enter lastname" value={lastName} onChange={this.onchange} error={errors.lastName} />
+          <TextInputGroup type="email" name="username" placeholder="Enter username" value={username} onChange={this.onchange} error={errors.username}/>
+          <TextInputGroup type="password" name="password" placeholder="Enter password" value={password} onChange={this.onchange} error={errors.password}/>
           <input type="submit" value="Add Contact" className="btn btn-block btn-success" />
         </form>
       </div>
@@ -62,23 +63,29 @@ class AddContact extends Component {
 
 
   validateContact() {
-    const {name, phone, email } = this.state;
+    const {firstName, lastName, username, password } = this.state;
 
-    if (name === '') {
+    if (firstName === '') {
       this.setState({
-        errors: { name: 'Name is required' }
+        errors: { firstName: 'firstName is required' }
       });
       return false;
     }
-    if (phone === '') {
+    if (lastName === '') {
       this.setState({
-        errors: { phone: 'phone is required' }
+        errors: { lastName: 'lastName is required' }
       });
       return false;
     }
-    if (email === '') {
+    if (username === '') {
       this.setState({
-        errors: { email: 'email is required' }
+        errors: { username: 'username is required' }
+      });
+      return false;
+    }
+    if (password === '') {
+      this.setState({
+        errors: { password: 'password is required' }
       });
       return false;
     }
