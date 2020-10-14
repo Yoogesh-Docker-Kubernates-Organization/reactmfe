@@ -5,22 +5,26 @@ import {AUTH_EVENT} from '../../../common/Types';
 //This is as exact as signupAction, which tells you what's going under the hood and why it is different then signoutAction
 export const signinAction = (signinForm, callback) => async (dispatch: AUTH_EVENT => void, getState: any, api:any)=>{
 
+    const url = '/authentication';
+    let res;
     console.log("Current State :", getState());
+
     try {
-            //const response = await axios.post(`${process.env.AUTH_API_URL}/signin`, signinForm);
-            dispatch({
-                type: 'auth_user',
-                payload: 'TestTokenByYoogesh',                         //response.data.token
-                isAuthenticated: true
-            });
-            setAuthTokenToLocalStorage('TestTokenByYoogesh');         //response.data.token
-            callback();
-        }
-    catch(error) {
-            dispatch({
-                type: 'auth_error',
-                payload: 'Invalid login credentials'
-            });
+        res = await api.post(url, signinForm);
+
+        dispatch({
+            type: 'auth_user',
+            payload: res.data.data.jwt,
+            isAuthenticated: true
+        });
+        setAuthTokenToLocalStorage(res.data.data.jwt);
+        callback();
+    } catch(e) {
+        console.log('Login failed with following reason: ',e)
+        dispatch({
+            type: 'auth_error',
+            payload: 'Invalid login credential'
+        });
     }
 }
 

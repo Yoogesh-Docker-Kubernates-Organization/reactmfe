@@ -16,8 +16,8 @@ class Signin extends Component {
     componentDidMount() {
         this.handleInitialize();
         const updatedFormObj = { 
-            email: 'yoogesh2002@yahoo.com',
-            password: 'updatedPassword',
+            username: 'dba@gmail.com',
+            password: '1234',     // updated password
             phone:'7137322412'
         }
         this.updateFormValue(updatedFormObj)
@@ -25,8 +25,8 @@ class Signin extends Component {
       
     handleInitialize() {
         const { signInForm } = this.props;
-        signInForm.email = 'syoogesh@gmail.com';
-        signInForm.password = 'initialPassword';
+        signInForm.username = 'syoogesh@gmail.com';
+        signInForm.password = 'initialPassword';   // initial password
         signInForm.phone = '8327628913';
         this.props.initialize(this.initializeData(signInForm));
    } 
@@ -35,7 +35,7 @@ class Signin extends Component {
        if (!signInForm) return {};
        
        const obj = {
-           email: signInForm.email,
+           username: signInForm.username,
            password: signInForm.password,
         };
         return obj;
@@ -60,7 +60,7 @@ class Signin extends Component {
               <div className="card-header">{this.props.errorMessage ? <span>{this.props.errorMessage.toUpperCase()}</span> : 'SIGN-IN'}</div>
                 <div className="card-body">
                   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                   <Field type="email" name="email" placeholder="Enter email" autoComplete="none" component={TextInput} />
+                   <Field type="email" name="username" placeholder="Enter username" autoComplete="none" component={TextInput} />
                    <Field type="tel" name="phone" placeholder="Enter Phone" autoComplete="none" normalize={OnlyNums} component={TextInput} />
                    <Field type="password" name="password" placeholder="Enter password" autoComplete="none" component={TextInput} />
                    <Field type="checkbox" name="rememberMe" placeholder="Remember Me" autoComplete="none" component={TextInput} />
