@@ -90,7 +90,11 @@ export const getContactAction = (source) => async (dispatch, getState, api) => {
   * Delete user
   */
  export const deleteContactAction = (uid, username) => async (dispatch, getState, api) =>  {
-    const url = `/user/${uid}?username=${username}&jwtToken=${getState().twm_setting.jwtToken}`;
+    let jwtToken = getState().twm_auth.authenticationToken;
+    if(jwtToken == ''){
+        jwtToken = getState().twm_setting.jwtToken;
+    }
+    const url = `/user/${uid}?username=${username}&jwtToken=${jwtToken}`;
     try {
         // we are not doing anything by response since it is returning empty object always, we don't even need to asign it to variable
         await api.delete(url);
