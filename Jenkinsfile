@@ -33,8 +33,22 @@ pipeline {
 		}
 
 		stage('Deploy to Cluster') {
+			environment{
+				//traditional kubernetes ingress gatway related variables
+				enableKubernetesIngress = "false"
+			}
+
 			steps {
-					sh "kubectl apply -f ${YAML_PATH}/webapp.yaml"
+				/* Webapp configuration */
+				sh "kubectl apply -f ${YAML_PATH}/webapp.yaml"
+				sh "kubectl apply -f ${YAML_PATH}/istio-route-webapp.yaml"
+
+				/* Traditional Kubernetes Ingress routing configuration */
+				script{
+					if (env.enableKubernetesIngress == 'true') {
+						sh "kubectl apply -f ${YAML_PATH}/ingress_webapp.yaml"
+					}
+				}
 			}
 		}
 	}
