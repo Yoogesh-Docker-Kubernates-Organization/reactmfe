@@ -11,6 +11,7 @@ constructor(props){
     super(props);
 }
 
+//https://stackoverflow.com/questions/53219164/what-s-the-difference-between-usestate-and-useeffect
 componentDidMount(){
     this.props.getAllContactAction();
 }
