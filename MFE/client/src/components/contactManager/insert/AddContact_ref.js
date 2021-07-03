@@ -5,10 +5,24 @@ import {withRouter} from "react-router-dom";  /* requied for redirection i.e. th
 import { connect } from 'react-redux';
 import requireAuth from '../../higherOrder/requireAuth';
 
+
+export type AddContactProps = {
+  username: string,
+  password: any,
+  firstName: string,
+  lastName: string,
+};
+
+export type AddContactState = {
+  transactionId: string,
+  errors: any,
+};
+
+
 /*
   This is for Uncontrolled component where the field are comming as props
 */
-class AddContact extends Component {
+class AddContact extends Component<AddContactProps, AddContactState>  {
 
   constructor(props)
   {
@@ -122,4 +136,3 @@ class AddContact extends Component {
 }
 
 export default connect(null, {addContactAction})(withRouter(requireAuth(AddContact)));
-
