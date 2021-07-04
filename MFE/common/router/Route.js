@@ -12,6 +12,7 @@ export default [
 
 {
     ...Header,
+    // path: '*',
 
     routes: [
         {
@@ -32,7 +33,7 @@ export default [
         
         {
             ...AddPage,
-            path: '/contact/add'
+            path: '/contact/add'          // path: '*/contact/add',
         },
         
         {
