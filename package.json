@@ -87,7 +87,7 @@
     "webpack-merge": "4.2.1",
     "webpack-node-externals": "3.0.0",
     "zipkin": "0.22.0",
-    "zipkin-instrumentation-axios": "0.1.2",
+    "zipkin-instrumentation-axios": "0.1.0",
     "zipkin-transport-http": "0.22.0"
   },
   "devDependencies": {
