@@ -16,3 +16,17 @@ if not run successfully, You may need to do the following installation</br>
 > npm install npm-run-all --save-dev </br>
 > npm install -g nodemon </br>
 
+Below are the files those could not be upgraded to a newer versions: <br>
+<pre>
+"mini-css-extract-plugin": "0.5.0",
+"postcss-import": "12.0.1",
+"postcss-loader": "3.0.0",
+"react-router": "4.3.1",
+"react-router-config": "1.0.0-beta.4",
+"react-router-dom": "^4.3.1",
+"webpack-assets-manifest": "4.0.6",
+"webpack-cli": "3.2.3",
+"css-loader": "^2.1.0",
+</pre>
+
+
